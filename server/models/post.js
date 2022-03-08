@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
   author: String,
@@ -9,7 +9,7 @@ const CommentSchema = new Schema({
   date: Date,
 });
 
-var PostSchema = new Schema({
+const PostSchema = new Schema({
   title: { type: String, required: true },
   author: { type: String, required: true },
   body: { type: String, required: true },
@@ -18,10 +18,6 @@ var PostSchema = new Schema({
   likes: Number,
   publish: Boolean,
   published_on: Date,
-});
-
-PostSchema.virtual("url").get(() => {
-  return "/posts/" + this.id;
 });
 
 module.exports = {
