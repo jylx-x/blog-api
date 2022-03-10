@@ -1,14 +1,10 @@
 import "./App.css";
-import RouteSwitch from "./RouteSwitch.js"
-import Navbar from "./components/Navbar.js";
-
+import RouteSwitch from "./RouteSwitch.js";
 
 function App() {
   return (
     <div className="App overflow-auto font-Raleway">
-      <RouteSwitch>
-        <Navbar />
-      </RouteSwitch>
+      <RouteSwitch></RouteSwitch>
     </div>
   );
 }

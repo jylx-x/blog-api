@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import {Link} from 'react-router-dom';
 
 function FeaturedPosts(props) {
   const { posts } = props;
@@ -94,7 +95,7 @@ function FeaturedPosts(props) {
               {featured[currentIndex].body}
             </p>
             <div className="underline underline-offset-1">
-              <a href={"/posts/" + featured[currentIndex]._id}>Read More</a>
+              <Link to={"/posts/" + featured[currentIndex]._id}>Read More</Link>
             </div>
           </div>
         </div>
