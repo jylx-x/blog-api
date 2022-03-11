@@ -16,8 +16,11 @@ const PostSchema = new Schema({
   comments: [CommentSchema],
   number_of_comments: Number,
   likes: Number,
+  featured: Boolean,
   publish: Boolean,
   published_on: Date,
+  bannerImg: String,
+  github_link: String
 });
 
 module.exports = {

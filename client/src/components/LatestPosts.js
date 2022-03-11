@@ -24,7 +24,7 @@ function LatestPosts(props) {
             <p className="line-clamp-4 h-24 mt-4">{posts.body}</p>
             <div className="my-3">
               <Link
-                to={"/posts/" + posts._id}
+                to={`/posts/${posts._id}`}
                 className="underline underline-offset-1 text-sm"
               >
                 Read More

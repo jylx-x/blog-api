@@ -159,29 +159,45 @@ exports.post_comment_like = (req, res) => {
     { "comments._id": req.params.commentid },
     {
       $inc: {
-        "comments.$.likes": 1
-      }
-    },
-    (err) => {
-      if(err) res.json(err);
-
-      res.json({ message: "Comment liked successfully"})
-    }
-  )
-};
-
-exports.post_comment_unlike = (req, res) => {
-  Post.findOneAndUpdate(
-    {"comments.id": req.params.commentid},
-    {
-      $inc: {
-        "comments.$.likes": -1
-      }
+        "comments.$.likes": 1,
+      },
     },
     (err) => {
       if (err) res.json(err);
 
-      res.json({ message: "Comment unliked successfully"})
+      res.json({ message: "Comment liked successfully" });
     }
-  )
-}
+  );
+};
+
+exports.post_comment_unlike = (req, res) => {
+  Post.findOneAndUpdate(
+    { "comments._id": req.params.commentid },
+    {
+      $inc: {
+        "comments.$.likes": -1,
+      },
+    },
+    (err) => {
+      if (err) res.json(err);
+
+      res.json({ message: "Comment unliked successfully" });
+    }
+  );
+};
+
+// exports.post_comment_unlike = (req, res) => {
+//   Post.findOneAndUpdate(
+//     { "comments.id": req.params.commentid },
+//     {
+//       $inc: {
+//         "comments.$.likes": -1,
+//       },
+//     },
+//     (err) => {
+//       if (err) res.json(err);
+
+//       res.json({ message: "Comment unliked successfully" });
+//     }
+//   );
+// };

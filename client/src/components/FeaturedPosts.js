@@ -76,14 +76,14 @@ function FeaturedPosts(props) {
       <div
         className="flex p-8 h-full w-full justify-center items-center gap-4 bg-local bg-top bg-no-repeat"
         style={{
-          backgroundImage: "url(" + featured[currentIndex].headerImg + ")",
+          backgroundImage: `url(${featured[currentIndex].bannerImg})`,
           backgroundColor: "grey",
           backgroundBlendMode: "screen",
         }}
       >
         <div className="flex w-3/4 h-4/5 p-3 rounded bg-gray-600 justify-between shadow-md text-white">
           <img
-            src={featured[currentIndex].headerImg}
+            src={featured[currentIndex].bannerImg}
             alt="featured-img"
             className="hidden lg:block h-full rounded"
           />
@@ -95,7 +95,7 @@ function FeaturedPosts(props) {
               {featured[currentIndex].body}
             </p>
             <div className="underline underline-offset-1">
-              <Link to={"/posts/" + featured[currentIndex]._id}>Read More</Link>
+              <Link to={`/posts/${featured[currentIndex]._id}`}>Read More</Link>
             </div>
           </div>
         </div>
