@@ -41,6 +41,8 @@ exports.post_update = (req, res) => {
     title: req.body.title,
     author: req.body.author,
     body: req.body.body,
+    github_link: req.body.github_link,
+    featured: req.body.featured,
     publish: req.body.publish,
   };
 

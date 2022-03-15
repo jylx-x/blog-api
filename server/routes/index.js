@@ -14,7 +14,7 @@ router.get('/posts/:postid', postsController.post_get)
 
 router.put('/posts/:postid', authenticate, postsController.post_update);
 
-router.delete('posts/:postid', authenticate, postsController.post_delete);
+router.delete('/posts/:postid', authenticate, postsController.post_delete);
 
 router.post('/posts/:postid/likes', postsController.post_like);
 

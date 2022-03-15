@@ -17,11 +17,20 @@ router.post("/login", function (req, res, next) {
       if (err) {
         res.send(err);
       }
-      
+
+      const username = user.username;
       const token = jwt.sign(user.toJSON(), process.env.Secret);
-      return res.json({ user, token });
+
+      res.cookie("userLogin", token, { httpOnly: true });
+      return res.json({ username });
     });
   })(req, res);
 });
+
+router.post("/logout", function (req, res, next) {
+  res.clearCookie('userLogin')
+  res.end()
+});
+
 
 module.exports = router;

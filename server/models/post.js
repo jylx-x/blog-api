@@ -19,7 +19,7 @@ const PostSchema = new Schema({
   featured: Boolean,
   publish: Boolean,
   published_on: Date,
-  bannerImg: String,
+  banner: String,
   github_link: String
 });
 

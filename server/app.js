@@ -35,10 +35,21 @@ passport.use(
   })
 );
 
+const cookieExtractor = req => {
+  let jwt = null 
+
+  if (req && req.cookies) {
+      jwt = req.cookies['userLogin']
+  }
+
+  return jwt
+}
+
+
 passport.use(
   new JWTStrategy(
     {
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: cookieExtractor,
       secretOrKey: process.env.Secret,
     },
     function (payload, done) {
@@ -63,7 +74,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
