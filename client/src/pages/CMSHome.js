@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react";
 import CMSNavbar from "../components/cms/CMSNavbar";
 import SignIn from "../components/cms/SignIn";
 import CMSAllPosts from "../components/cms/CMSAllPosts.js";
+import Footer from "../components/Footer";
 
 function CMS(props) {
   const { user, setUser } = props;
-  const [render, setRender] = useState(false);
-
-  const rerender = () => {
-    render ? setRender(false) : setRender(true);
-  };
 
   useEffect(() => {
     const username = localStorage.getItem("user");
@@ -21,17 +17,19 @@ function CMS(props) {
 
   if (!user) {
     return (
-      <div>
-        <CMSNavbar user={user} setUser={setUser}/>
+      <div className="h-screen flex flex-col">
+        <CMSNavbar user={user} setUser={setUser} />
         <SignIn user={user} setUser={setUser} />
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div>
-      <CMSNavbar user={user} setUser={setUser}/>
-      <CMSAllPosts rerender={rerender} />
+    <div className="h-screen flex flex-col">
+      <CMSNavbar user={user} setUser={setUser} />
+      <CMSAllPosts />
+      <Footer />
     </div>
   );
 }

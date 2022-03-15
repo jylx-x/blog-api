@@ -106,28 +106,32 @@ function PostComments(props) {
       <h1 className="text-4xl my-4" ref={commentRef}>
         Comments
       </h1>
-      <div className="flex flex-col gap-6">
-        {post.comments.map((comment) => (
-          <div key={comment._id}>
-            <div className="bg-slate-50 px-5 py-6 flex flex-col gap-5">
-              <p>{comment.comment_body}</p>
-              <div className="flex items-center justify-end gap-1">
-                <button onClick={() => likeComment(comment._id, false)}>
-                  <AiOutlineDislike />
-                </button>
-                <div>{comment.likes}</div>
-                <button onClick={() => likeComment(comment._id, true)}>
-                  <AiOutlineLike />
-                </button>
+      {post.comments.length === 0 ? (
+        <div className="h-48 flex justify-center items-center">No Comments</div>
+      ) : (
+        <div className="flex flex-col gap-6">
+          {post.comments.map((comment) => (
+            <div key={comment._id}>
+              <div className="bg-slate-50 px-5 py-6 flex flex-col gap-5">
+                <p>{comment.comment_body}</p>
+                <div className="flex items-center justify-end gap-1">
+                  <button onClick={() => likeComment(comment._id, false)}>
+                    <AiOutlineDislike />
+                  </button>
+                  <div>{comment.likes}</div>
+                  <button onClick={() => likeComment(comment._id, true)}>
+                    <AiOutlineLike />
+                  </button>
+                </div>
+              </div>
+              <div className="flex justify-between bg-gray-600 text-white px-5 py-1 text-sm">
+                <div>{`Posted by: ${comment.author}`}</div>
+                <div>{format(new Date(comment.date), "PPpp")}</div>
               </div>
             </div>
-            <div className="flex justify-between bg-gray-600 text-white px-5 py-1 text-sm">
-              <div>{`Posted by: ${comment.author}`}</div>
-              <div>{format(new Date(comment.date), "PPpp")}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

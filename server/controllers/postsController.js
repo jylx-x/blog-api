@@ -17,8 +17,11 @@ exports.post_create = (req, res) => {
     comments: [],
     number_of_comments: 0,
     likes: 0,
+    featured: req.body.featured,
     publish: req.body.publish,
     published_on: new Date(),
+    github_link: req.body.github_link,
+    banner: req.body.banner
   });
 
   post.save((err) => {

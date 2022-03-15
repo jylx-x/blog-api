@@ -3,10 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function AllPosts(props) {
-  const {rerender} = props;
-
   const [posts, setPosts] = useState();
   const [loading, setLoading] = useState(true);
+  const [render, setRender] = useState(false);
+
+  const rerender = () => {
+    render ? setRender(false) : setRender(true);
+  };
 
   const deletePost = (postID) => {
     const url = `http://localhost:9000/posts/${postID}`
@@ -23,12 +26,12 @@ function AllPosts(props) {
       setPosts(res.data);
       setLoading(false);
     });
-  }, []);
+  }, [render]);
 
-  if (loading) return <div />;
+  if (loading) return <div className="bg-slate-50 flex-1"/>;
 
   return (
-    <div className="bg-slate-50 h-full">
+    <div className="bg-slate-50 flex-1">
       <div className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
         {posts.map((post) => (
           <div

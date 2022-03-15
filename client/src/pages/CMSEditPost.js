@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CMSNavbar from "../components/cms/CMSNavbar";
-import CMSPost from '../components/cms/CMSPost.js'
+import CMSPost from "../components/cms/CMSPost.js";
+import Footer from "../components/Footer";
 
 function EditPost(props) {
   const { user, setUser } = props;
@@ -25,16 +26,19 @@ function EditPost(props) {
 
   if (loading) {
     return (
-      <div>
-        <CMSNavbar user={user}/>
+      <div className="flex flex-col h-screen">
+        <CMSNavbar user={user} setUser={setUser}/>
+        <main className="bg-slate-50 flex-1"/>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div>
-      <CMSNavbar />
+    <div className="flex flex-col h-screen">
+      <CMSNavbar user={user} setUser={setUser} />
       <CMSPost post={post} loading={loading} />
+      <Footer />
     </div>
   );
 }

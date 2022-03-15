@@ -2,43 +2,43 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 
-function Edit(props) {
-  const { post, loading } = props;
-  const [title, setTitle] = useState(post.title);
-  const [body, setBody] = useState(post.body);
-  const [github, setGithub] = useState(post.github_link);
-  const [banner, setBanner] = useState(post.banner);
-  const [featured, setFeatured] = useState(post.featured);
-  const [publish, setPublish] = useState(post.publish);
+function CMSCreatePost() {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [github, setGithub] = useState("");
+  const [banner, setBanner] = useState("");
+  const [featured, setFeatured] = useState(false);
+  const [publish, setPublish] = useState(false);
   const [submit, setSubmit] = useState(false);
 
-  const update = (e) => {
+  const create = (e) => {
     e.preventDefault();
 
-    const url = `http://localhost:9000/posts/${post._id}`;
+    const url = "http://localhost:9000/posts"
 
     const data = {
       title: title,
+      author: "Me",
       body: body,
-      github_link: github,
-      banner: banner,
       featured: featured,
       publish: publish,
+      github_link: github,
+      banner: banner,
     };
 
-    axios.put(url, data, { withCredentials: true }).then(() => {
-      setSubmit(true);
-    });
-  };
+    console.log(data)
 
-  if (loading) return <div />;
+    axios.post(url, data, {withCredentials: true}).then(() => {
+      setSubmit(true)
+    })
+  };
 
   if (submit) return <Navigate to="/cms" />;
 
   return (
     <main className="flex-1 bg-slate-50 flex justify-center items-center">
       <form
-        onSubmit={update}
+        onSubmit={create}
         className="flex flex-col bg-gray-600 h-5/6 w-3/4 text-white p-5 gap-4 rounded"
       >
         <div className="flex flex-col">
@@ -99,10 +99,14 @@ function Edit(props) {
             />
           </div>
         </div>
-        <div className="self-end"><button className="bg-slate-50 text-black rounded py-1 px-4">Submit Changes</button></div>
+        <div className="self-end">
+          <button className="bg-slate-50 text-black rounded py-1 px-4">
+            Submit Changes
+          </button>
+        </div>
       </form>
     </main>
   );
 }
 
-export default Edit;
+export default CMSCreatePost;

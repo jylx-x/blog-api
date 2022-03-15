@@ -17,7 +17,7 @@ function RouteSwitch(props) {
       <Route path="/" element={<Home />} />
       <Route path="/cms" element={<CMS user={user} setUser={setUser} />} />
       <Route path="/cms/:postid/comments" element={<CMSComments user={user} setUser={setUser}/>} />
-      <Route path="/cms//:postid/edit" element={<CMSEditPost user={user} setUser={setUser} />} />
+      <Route path="/cms/:postid/edit" element={<CMSEditPost user={user} setUser={setUser} />} />
       <Route path="/cms/new-post" element={<CMSNewPost user={user} setUser={setUser} />} />
       <Route path="/posts" element={<Posts />} />
       <Route path="/posts/:postid" element={<Post />} />

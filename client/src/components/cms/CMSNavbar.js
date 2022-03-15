@@ -25,7 +25,7 @@ function Navbar(props) {
       </Link>
       {user ? (
         <div className="flex gap-3">
-          <Link to="">New Post</Link>
+          <Link to="/cms/new-post">New Post</Link>
           <button onClick={() => {logout()}}>Logout</button>
         </div>
       ) : (

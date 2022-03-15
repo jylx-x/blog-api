@@ -1,6 +1,8 @@
 import axios from "axios";
+import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import CMSNavbar from "../components/cms/CMSNavbar";
+import Footer from "../components/Footer";
 
 function CMSComments(props) {
   const { user, setUser } = props;
@@ -37,28 +39,43 @@ function CMSComments(props) {
 
   if (loading || !post.comments.length) {
     return (
-      <div>
-        <CMSNavbar user={user}/>
-        <div>No Comments</div>
+      <div className="flex flex-col h-screen">
+        <CMSNavbar user={user} setUser={setUser} />
+        <main className="flex-1 bg-slate-50 flex justify-center items-center">
+          <div>No Comments</div>
+        </main>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div>
-      <CMSNavbar user={user}/>
-      {post.comments.map((comment) => (
-        <div>
-          {/* <div>{console.log(comment)}</div> */}
-          <div>{comment.author}</div>
-          <div>{comment.comment_body}</div>
-          <div>{comment.likes}</div>
-          <div>{comment.date}</div>
-          <button onClick={() => deletePost(post._id, comment._id)}>
-            Delete Comment
-          </button>
-        </div>
-      ))}
+    <div className="flex flex-col h-screen">
+      <CMSNavbar user={user} setUser={setUser} />
+      <main className="bg-slate-50 flex-1 p-5">
+        {post.comments.map((comment) => (
+          <div key={comment._id} className="bg-gray-600 text-white">
+            <div className="px-5 py-6">
+              <div className="py-2">{comment.comment_body}</div>
+              <div className="flex gap-4 text-sm">
+                <div>{`Likes: ${comment.likes}`}</div>
+                <div>{`Comment by: ${comment.author}`}</div>
+                <div>{`Commented on: ${format(
+                  new Date(comment.date),
+                  "PPpp"
+                )}`}</div>
+              </div>
+            </div>
+            <button
+              onClick={() => deletePost(post._id, comment._id)}
+              className="bg-white w-full py-1 text-red-600"
+            >
+              Delete Comment
+            </button>
+          </div>
+        ))}
+      </main>
+      <Footer />
     </div>
   );
 }
